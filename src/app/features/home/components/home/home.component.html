@@ -1,0 +1,39 @@
+<div class="container-fluid container-centralized text-xs" #container>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-header-primary"></div>
+        </div>
+        <div class="col-12">
+            <div class="card card-header-secondary">
+                <em class="ic ic-logo"></em>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-12 text-center">
+            <span class='text-xl'>Gerações de Games Pokémon</span>
+        </div>
+        <div class="col-12" align="center">
+            <div class="card-list">               
+                <div class="card-list-items" *ngFor="let item of list; index as i">
+                    <div class="row">
+                        <div class="col-3 text-lg">{{item.name | titlecase}}</div>                       
+                        <div class="col-3 offset-6 mt-2">
+                            <button (click)="redirectTo(item.id);" class="btn btn-sm btn-info">Ver Pokémons deste grupo</button>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+
+    <div class="row">
+      <div class="col-12 text-sm">
+        <ngb-alert *ngIf='true' [type]="danger" ></ngb-alert>
+      </div>
+    </div>
+
+</div>
