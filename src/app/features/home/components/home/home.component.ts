@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   private _list: any;
+  private _dadosURL = [
+    {label: 'HOME', url: 'home'},
+  ];
 
   constructor(
     private homeService: HomeService,
@@ -32,6 +35,10 @@ export class HomeComponent implements OnInit {
   get list() {
     return this._list;
   }
+  
+  get dadosURL() {
+    return this._dadosURL;
+  }
  
   private _format(result) {    
     result.map((item) => {
@@ -46,20 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   public redirectTo(id) {
-    this.router.navigate([`/generation/1`]);
+    this.router.navigate([`/generation/`+id]);
   }
   
-  
-
-  // public teste(url) {
-  //   console.log('chegou url', url);
-  //   this.homeService.getPokemons(url)
-  //   .subscribe((res) => {
-  //     console.log(res, 'paçoca');    
-  //     this._list = res.results;
-  //   }, (err: Error)  => {
-
-  //   })
-  // }
-
 }

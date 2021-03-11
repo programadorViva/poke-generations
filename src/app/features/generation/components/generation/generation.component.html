@@ -10,8 +10,35 @@
         </div>
     </div>
     
+    <app-breadcrumb [dadosURL]="dadosURL"></app-breadcrumb>
+
+    <div class="row">
+        <div class="col-12 text-sm">
+            <ngb-alert *ngIf='ngbAlert.type' [type]="ngbAlert.type" (close)="closeMessage()">{{ ngbAlert.msg }}</ngb-alert>
+        </div>
+    </div>
+    
     
     <div class="row">
+        
+        <div class="offset-3 col-6">
+            <form [formGroup]="formGroup">
+                <div class="input-group w-70 my-3">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="name" 
+                        placeholder="Pesquise seu pókemon" 
+                        aria-label="Pesquise seu pókemon" 
+                        aria-describedby="button-addon2"
+                    >
+                    <button class="btn btn-sm btn-outline-info ml-2" (click)='searchPokemon()' type="button" id="button-addon2">Conhecer Pokémon</button>
+                    <button class="btn btn-sm btn-outline-info ml-2" (click)='clear()' type="button" id="button-addon2">Limpar</button>
+                </div>
+            </form>
+        </div>
+        
+
         <div class="col-12 text-center">
             <span class='text-xl'>Lista de Pokémon</span>
         </div>
@@ -23,7 +50,7 @@
                         <div class="col-4 text-lg">{{response?.main_region?.name}}</div>                       
                         <div class="col-4 text-lg">{{ listPokemon?.length }} Pokémons</div>                       
                     </div>
-                    <div class="row ">
+                    <div class="row" *ngIf='hasSearch'>
                         <div class="col-4 py-3" *ngFor="let item of listPokemon; index as i"> 
                             <div class="card-pokemon">
                                 <div class="row">
@@ -55,16 +82,37 @@
                             </div>                            
                         </div>
                     </div>
+                    <div class="row" *ngIf='!hasSearch'>
+                        <div class="offset-4 col-4 py-3" > 
+                            <div class="card-pokemon">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <img *ngIf="pokemon?.sprite" class='pokemon-sprite' src='{{pokemon?.sprite}}' >
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <span class='text-lg'>{{pokemon?.name | titlecase }}</span>
+                                    </div>
+                                    
+                                    <div class="col-4"><em  class="ic ic-sword"></em>
+                                        <span class='text-lg'>{{pokemon?.hp}}</span>
+                                    </div>
+                                    <div class="col-4"><em  class="ic ic-heart"></em>
+                                        <span class='text-lg' >{{pokemon?.attack }}</span>
+                                    </div>
+                                    <div class="col-4"><em  class="ic ic-poker-chip"></em>
+                                        <span class='text-lg' >{{pokemon?.defense }}</span>
+                                    </div>
+
+                                    <div class="col-12 mt-2">
+                                        <button (click)="detailPokemon(pokemon?.name);" class="btn btn-sm btn-info">Descobrir Pokémon</button>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
      
     </div>
-
-    <div class="row">
-      <div class="col-12 text-sm">
-        <ngb-alert *ngIf='true' [type]="danger" ></ngb-alert>
-      </div>
-    </div>
-
 </div>

@@ -1,0 +1,6 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li *ngFor="let item of urlFormat; index as i" class="breadcrumb-item  cursor-pointer" aria-current="page" (click)="redirectTo(i);" title="{{ item.label }}" [attr.aria-label]="item.label">{{ item.label }}</li>
+    </ol>
+</nav>
+  
